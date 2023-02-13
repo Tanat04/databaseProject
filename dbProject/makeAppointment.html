@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Appointment</title>
+    
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+  
+  <body ><!--Call loadData from products.js-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/dbProject/admin.html">Admin</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" aria-current="page" href="/dbProject/doctorList.html">Doctor</a>
+                <a class="nav-link" href="/dbProject/patientList.html">Patient</a>
+                <a class="nav-link active" aria-current="page" href="/dbProject/makeAppointment.html">Appointment</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <br><br>
+      <div class="container">
+      <form id="form">
+        <div class="form-group">
+            <label for="patientID">Patient ID:</label>
+            <select class="form-control" id="patientID">
+              <option value="">Select Patient ID</option>
+              <option value="p01">p01</option>
+              <option value="p02">p02</option>
+            </select>
+          </div>
+        <div class="form-group">
+          <label for="patientName">Patient Name:</label>
+          <select class="form-control" id="patientName">
+            <option value="">Select Patient</option>
+            <option value="John Doe">John Doe</option>
+            <option value="Jane Smith">Jane Smith</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label for="doctorID">Doctor ID:</label>
+            <select class="form-control" id="doctorID">
+              <option value="">Select Doctor ID</option>
+              <option value="d01">d01</option>
+              <option value="d02">d02</option>
+              <option value="d03">d03</option>
+            </select>
+          </div>
+        <div class="form-group">
+          <label for="doctorName">Doctor Name:</label>
+          <select class="form-control" id="doctorName">
+            <option value="">Select Doctor</option>
+            <option value="Otto Toot">Otto Toot</option>
+            <option value="Jacob Thornton">Jacob Thornton</option>
+            <option value="Bob Marley">Bob Marley</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="appointmentDate">Appointment Date:</label>
+          <input type="date" class="form-control" id="appointmentDate">
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input type="text" class="form-control" id="status">
+          </div>
+        <button type="submit" class="btn btn-primary" onclick="addRecord(event)">Add</button>
+      </form></div>
+      <br>
+      <div class="container">
+        <table class="table table-secondary table-hover" id="patientTable">
+            <thead>
+              <tr>
+                <th scope="col">Appointment ID</th>
+                <th scope="col">Patient ID</th>
+                <th scope="col">Patient ID</th>
+                <th scope="col">Doctor ID</th>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Appointment Date</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentTbody">
+
+            <tr>
+                <td>1</td>
+                <td>p01</td>
+                <td>John Doe</td>
+                <td>d02</td>
+                <td>Jacob Thornton</td>
+                <td>01/03/2023</td>
+                <td>Admitted</td>
+              </tr>
+              
+              <tr>
+                <td>2</td>
+                <td>p02</td>
+                <td>Jane Smith</td>
+                <td>d01</td>
+                <td>Otto Toot</td>
+                <td>28/02/2023</td>
+                <td>Admitted</td>
+              </tr>
+            </tbody>
+          </table></div>
+
+          <script>function addRecord(event) {
+            // Get the values from the form
+            event.preventDefault();
+
+var patientID = document.getElementById("patientID").value;
+var patientName = document.getElementById("patientName").value;
+var doctorID = document.getElementById("doctorID").value;
+var doctorName = document.getElementById("doctorName").value;
+var appointmentDate = document.getElementById("appointmentDate").value;
+var status = document.getElementById("status").value;
+
+var appointmentTbody = document.getElementById("appointmentTbody");
+var lastRow = appointmentTbody.rows[appointmentTbody.rows.length - 1];
+var appointmentID = (lastRow) ? parseInt(lastRow.cells[0].innerHTML) + 1 : 1;
+
+var newRow = appointmentTbody.insertRow();
+var cell1 = newRow.insertCell(0);
+var cell2 = newRow.insertCell(1);
+var cell3 = newRow.insertCell(2);
+var cell4 = newRow.insertCell(3);
+var cell5 = newRow.insertCell(4);
+var cell6 = newRow.insertCell(5);
+var cell7 = newRow.insertCell(6);
+
+cell1.innerHTML = appointmentID;
+cell2.innerHTML = patientID;
+cell3.innerHTML = patientName;
+cell4.innerHTML = doctorID;
+cell5.innerHTML = doctorName;
+cell6.innerHTML = appointmentDate;
+cell7.innerHTML = status;
+}
+
+
+
+
+</script>
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+
+</html>
