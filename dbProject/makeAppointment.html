@@ -39,7 +39,7 @@
       <form id="form">
         <div class="form-group">
             <label for="patientID">Patient ID:</label>
-            <select class="form-control" id="patientID">
+            <select class="form-control" id="patientID" style="margin-bottom: 12px;">
               <option value="">Select Patient ID</option>
               <option value="p01">p01</option>
               <option value="p02">p02</option>
@@ -47,7 +47,7 @@
           </div>
         <div class="form-group">
           <label for="patientName">Patient Name:</label>
-          <select class="form-control" id="patientName">
+          <select class="form-control" id="patientName" style="margin-bottom: 12px;">
             <option value="">Select Patient</option>
             <option value="John Doe">John Doe</option>
             <option value="Jane Smith">Jane Smith</option>
@@ -55,7 +55,7 @@
         </div>
         <div class="form-group">
             <label for="doctorID">Doctor ID:</label>
-            <select class="form-control" id="doctorID">
+            <select class="form-control" id="doctorID" style="margin-bottom: 12px;">
               <option value="">Select Doctor ID</option>
               <option value="d01">d01</option>
               <option value="d02">d02</option>
@@ -64,7 +64,7 @@
           </div>
         <div class="form-group">
           <label for="doctorName">Doctor Name:</label>
-          <select class="form-control" id="doctorName">
+          <select class="form-control" id="doctorName" style="margin-bottom: 12px;">
             <option value="">Select Doctor</option>
             <option value="Otto Toot">Otto Toot</option>
             <option value="Jacob Thornton">Jacob Thornton</option>
@@ -73,17 +73,17 @@
         </div>
         <div class="form-group">
           <label for="appointmentDate">Appointment Date:</label>
-          <input type="date" class="form-control" id="appointmentDate">
+          <input type="date" class="form-control" id="appointmentDate" style="margin-bottom: 12px;">
         </div>
         <div class="form-group">
             <label for="status">Status:</label>
-            <input type="text" class="form-control" id="status">
+            <input type="text" class="form-control" id="status" style="margin-bottom: 12px;">
           </div>
         <button type="submit" class="btn btn-primary" onclick="addRecord(event)">Add</button>
       </form></div>
       <br>
       <div class="container">
-        <table class="table table-secondary table-hover" id="patientTable">
+        <table class="table table-striped" id="patientTable" style="margin-bottom: 100px;">
             <thead>
               <tr>
                 <th scope="col">Appointment ID</th>

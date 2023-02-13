@@ -39,16 +39,16 @@
       
       <div class="container">
         <form id="form">
-            <input type="text" id="id" placeholder="Doctor ID">
-            <input type="text" id="name" placeholder="Doctor Name">
-            <input type="text" id="phone" placeholder="Doctor Phone Number">
+            <input class="form-control" type="text" id="id" placeholder="Doctor ID" style="margin-bottom: 15px;">
+            <input class="form-control" type="text" id="name" placeholder="Doctor Name" style="margin-bottom: 15px;">
+            <input class="form-control" type="text" id="phone" placeholder="Doctor Phone Number" style="margin-bottom: 15px;">
             <button type="button" class="btn btn-primary" onclick="addData()">Add</button>
           </form>
       
       </div>
       <br>
       <div class="container">
-        <table class="table table-secondary table-hover" id="doctorTable">
+        <table class="table table-striped" id="doctorTable">
             <thead>
               <tr>
                 <th scope="col">Doctor ID</th>

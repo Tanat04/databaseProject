@@ -37,12 +37,12 @@
       <br><br>
       <div class="container">
         <form id="form">
-            <input type="text" id="id" placeholder="Patient ID">
-            <input type="text" id="name" placeholder="Patient Name">
-            <input type="text" id="phone" placeholder="Patient Phone Number">
-            <input type="date" id="dob" placeholder="Patient DOB">
-            <input type="text" id="gender" placeholder="Patient Gender">
-            <input type="text" id="status" placeholder="Patient Status">
+            <input class="form-control"type="text" id="id" placeholder="Patient ID" style="margin-bottom: 15px;">
+            <input class="form-control" type="text" id="name" placeholder="Patient Name" style="margin-bottom: 15px;">
+            <input class="form-control" type="text" id="phone" placeholder="Patient Phone Number" style="margin-bottom: 15px;">
+            <input class="form-control" type="date" id="dob" placeholder="Patient DOB" style="margin-bottom: 15px;">
+            <input class="form-control" type="text" id="gender" placeholder="Patient Gender" style="margin-bottom: 15px;">
+            <input class="form-control" type="text" id="status" placeholder="Patient Status" style="margin-bottom: 15px;">
 
             <button type="button" class="btn btn-primary" onclick="addData()">Add</button>
           </form>
@@ -50,7 +50,7 @@
       </div>
       <br>
       <div class="container">
-        <table class="table table-secondary table-hover" id="patientTable">
+        <table class="table table-striped" id="patientTable">
             <thead>
               <tr>
                 <th scope="col">Patient ID</th>
