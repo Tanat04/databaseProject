@@ -1,3 +1,37 @@
+<?php
+include 'database.include.php';
+?>
+
+<?php
+session_start();
+
+
+if (!isset($_SESSION['userID'])) {
+  // user is not logged in, redirect to login page
+  header('Location: login.php');
+  exit;
+}
+
+// get the appointments for the patient
+$patientID = $_SESSION['userID'];
+if(isset($pdo)) {
+  $stmt = $pdo->prepare("SELECT patientName FROM patient WHERE patientID = :patientID");
+  $stmt->bindParam(":patientID", $patientID);
+  $stmt->execute();
+  $patient = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+// get the appointments for the patient
+if(isset($pdo)) {
+  $stmt = $pdo->prepare("SELECT appointment.*, doctor.doctorName FROM appointment JOIN doctor 
+  ON appointment.doctorId = doctor.doctorId WHERE appointment.patientID = :patientID");
+  $stmt->bindParam(":patientID", $patientID);
+  $stmt->execute();
+  $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -20,13 +54,18 @@
   <body ><!--Call loadData from products.js-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/dbProject/patient.html">Patient</a>
+          <a class="navbar-brand" href="/hospital/patient.php">Welcome Back - <?php echo $patient['patientName']; ?></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
             </div>
+            <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/hospital/">Log Out</a>
+        </li>
+      </ul>
           </div>
         </div>
       </nav>
@@ -38,6 +77,7 @@
       </div>
       <div class="container">
         <br>
+        <div id="appointments">
         <table class="table table-striped" id="patientTable">
             <thead>
               <tr>
@@ -50,27 +90,18 @@
               </tr>
             </thead>
             <tbody id="patientTbody">
+              <?php foreach ($appointments as $row): ?>
               <tr>
-                <td>p01</td>
-                <td>Jacob Thornton</td>
-                <td>01/04/2023</td>
-                <td>14:30</td>
-                <td>Admitted</td>
-                <td><button type="button" class="btn btn-primary btn-sm btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 80px">
-                  View
-                </button></td></tr>
-              <tr>
-                <td>p01</td>
-                <td>Otto Toot</td>
-                <td>01/04/2022</td>
-                <td>12:30</td>
-                <td>Discharged</td>
-                <td><button type="button" class="btn btn-primary btn-sm btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 80px">
-                  View
-                </button></td>
+                <td><?php echo $row['patientId']; ?></td>
+                <td><?php echo $row['doctorName']; ?></td>
+                <td><?php echo $row['appointmentDate']; ?></td>
+                <td><?php echo $row['appointmentTime']; ?></td>
+                <td><?php echo $row['appointmentStatus']; ?></td>
+                <td><button type="button" class="btn btn-primary btn-sm btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-note="<?php echo $row['doctorNote']; ?>">View Note</button></td>
               </tr>
+            <?php endforeach; ?>
             </tbody>
-          </table></div>
+          </table></div></div>
 
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -80,7 +111,6 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. In dolore enim voluptatem aspernatur nesciunt soluta iste fuga eum incidunt magni architecto iusto, amet quis at nulla! Provident debitis, non atque fugit perferendis porro ipsum voluptatum illum facere quos corporis dolores beatae veritatis error et odio ea saepe quas minus officia tenetur ab! Autem consectetur sunt totam optio ut. Ratione dicta saepe molestias aliquam beatae atque expedita illum nobis deserunt incidunt a nam dolor placeat inventore quisquam, necessitatibus vitae porro nesciunt! A, maiores adipisci aliquam, voluptas facilis optio corrupti ipsa, explicabo fugiat quasi voluptatem dolore ab voluptatibus eligendi minus vero ipsam.
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
@@ -88,6 +118,16 @@
               </div>
             </div>
           </div>
+
+          <script>
+  var myModal = document.getElementById('exampleModal')
+  myModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget
+    var note = button.getAttribute('data-note')
+    var modalBody = myModal.querySelector('.modal-body')
+    modalBody.textContent = note
+  })
+</script>
 
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
               <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

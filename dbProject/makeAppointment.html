@@ -76,6 +76,10 @@
           <input type="date" class="form-control" id="appointmentDate" style="margin-bottom: 12px;">
         </div>
         <div class="form-group">
+          <label for="appointmentTime">Appointment Time:</label>
+          <input type="time" class="form-control" id="appointmentTime" style="margin-bottom: 12px;">
+        </div>
+        <div class="form-group">
             <label for="status">Status:</label>
             <input type="text" class="form-control" id="status" style="margin-bottom: 12px;">
           </div>
@@ -92,6 +96,7 @@
                 <th scope="col">Doctor ID</th>
                 <th scope="col">Doctor Name</th>
                 <th scope="col">Appointment Date</th>
+                <th scope="col">Appointment Time</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -104,6 +109,7 @@
                 <td>d02</td>
                 <td>Jacob Thornton</td>
                 <td>01/03/2023</td>
+                <td>14:30</td>
                 <td>Admitted</td>
               </tr>
               
@@ -114,6 +120,7 @@
                 <td>d01</td>
                 <td>Otto Toot</td>
                 <td>28/02/2023</td>
+                <td>12:00</td>
                 <td>Admitted</td>
               </tr>
             </tbody>
@@ -128,6 +135,7 @@ var patientName = document.getElementById("patientName").value;
 var doctorID = document.getElementById("doctorID").value;
 var doctorName = document.getElementById("doctorName").value;
 var appointmentDate = document.getElementById("appointmentDate").value;
+var appointmentTime = document.getElementById("appointmentTime").value;
 var status = document.getElementById("status").value;
 
 var appointmentTbody = document.getElementById("appointmentTbody");
@@ -142,6 +150,7 @@ var cell4 = newRow.insertCell(3);
 var cell5 = newRow.insertCell(4);
 var cell6 = newRow.insertCell(5);
 var cell7 = newRow.insertCell(6);
+var cell8 = newRow.insertCell(7);
 
 cell1.innerHTML = appointmentID;
 cell2.innerHTML = patientID;
@@ -149,7 +158,8 @@ cell3.innerHTML = patientName;
 cell4.innerHTML = doctorID;
 cell5.innerHTML = doctorName;
 cell6.innerHTML = appointmentDate;
-cell7.innerHTML = status;
+cell7.innerHTML = appointmentTime;
+cell8.innerHTML = status;
 }
 
 

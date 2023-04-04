@@ -24,14 +24,14 @@
         <h1 style="text-align: center; margin-bottom: 50px;">Hospital DB Project</h1>
 
 
-        <form action="">
-          User ID: <input class="form-control" type="text" id="userID"><br>
-          Password: <input class="form-control" type="password" id="password"><br>
-          <input class="btn btn-primary" type="button" value="Submit" onclick="checkCredentials()">
+        <form action="login.php" method="post">
+          User ID: <input class="form-control" type="text" id="userID" name="userID" required><br>
+          Password: <input class="form-control" type="password" id="password" name="password" required><br>
+          <input class="btn btn-primary" type="submit" value="login">
         </form>
       </div>
     
-        <script>
+        <!-- <script>
           function checkCredentials() {
             var userID = document.getElementById("userID").value;
             var password = document.getElementById("password").value;
@@ -47,7 +47,7 @@
               alert("Incorrect user ID or password. Please try again!.");
             }
           }
-        </script>
+        </script> -->
   
   
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
